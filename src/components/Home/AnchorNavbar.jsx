@@ -5,7 +5,6 @@ import {
     Button,
     Card,
     Input,
-    Progress,
     Layout,
     Menu,
     Switch,
@@ -14,14 +13,14 @@ import {
     Col,
     Row,
     Statistic,
+    Drawer,
 } from "antd";
-
 import {
     HomeOutlined,
-    SearchOutlined,
     UserOutlined,
     ApartmentOutlined,
     LogoutOutlined,
+    MenuOutlined,
 } from "@ant-design/icons";
 import "antd/dist/reset.css";
 import CountUp from "react-countup";
@@ -29,10 +28,8 @@ import CountUp from "react-countup";
 const { defaultAlgorithm, darkAlgorithm } = theme;
 const { Header, Content } = Layout;
 
-//Statistics
 const formatter = (value) => <CountUp end={value} separator="," />;
 
-//flats data
 const flats = [
     {
         title: "Downtown Seattle",
@@ -48,10 +45,11 @@ const flats = [
     },
 ];
 
-export default function App() {
+export default function AnchorNavbar() {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [isSmallScreen, setIsSmallScreen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     const showModal = () => {
         setIsModalOpen(true);
@@ -65,8 +63,17 @@ export default function App() {
         setIsModalOpen(false);
     };
 
+    const showDrawer = () => {
+        setIsDrawerOpen(true);
+    };
+
+    const closeDrawer = () => {
+        setIsDrawerOpen(false);
+    };
+
     useEffect(() => {
         const handleResize = () => setIsSmallScreen(window.innerWidth < 768);
+        handleResize();
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
@@ -113,56 +120,38 @@ export default function App() {
                     style={{
                         background: isDarkMode ? "#141414" : "#131D4F",
                         padding: "0 16px",
-
                         display: "flex",
-                        justifyContent: "space-between",
                         alignItems: "center",
-                        backgroundColor: "#131D4F",
+                        justifyContent: "space-between",
+                        overflowX: "hidden",
                     }}
                 >
-                    <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "24px",
-                        }}
-                    >
-                        {isSmallScreen ? (
-                            <img
-                                src="/logo.svg"
-                                alt="Smart Rentals Logo"
-                                style={{ height: 40, paddingRight: "10px" }}
-                            />
-                        ) : (
-                            <div
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                        <img
+                            src="/logo.svg"
+                            alt="Smart Rentals Logo"
+                            style={{
+                                height: isSmallScreen ? 32 : 40,
+                                paddingRight: "10px",
+                            }}
+                        />
+                        {!isSmallScreen && (
+                            <h1
                                 style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "10px",
+                                    margin: 0,
+                                    fontFamily: "Permanent Marker",
+                                    fontSize: isSmallScreen
+                                        ? "1.5rem"
+                                        : "2.5rem",
+                                    fontWeight: "bold",
+                                    color: "#fff",
+                                    textShadow: isDarkMode
+                                        ? "1px 1px 2px rgba(0, 0, 0, 0.5)"
+                                        : "none",
                                 }}
                             >
-                                <img
-                                    src="/logo.svg"
-                                    alt="Smart Rentals Logo"
-                                    style={{ height: 40 }}
-                                />
-                                <h1
-                                    className="text-3xl text-white cormorant-garamond"
-                                    style={{
-                                        margin: 0,
-                                        fontFamily: "Permanent Marker",
-                                        fontSize: "2.5rem",
-                                        fontWeight: "bold",
-                                        textShadow: isDarkMode
-                                            ? "1px 1px 2px rgba(0, 0, 0, 0.5)"
-                                            : "none",
-                                        transition:
-                                            "color 0.3s ease, text-shadow 0.3s ease",
-                                    }}
-                                >
-                                    Smart Rentals
-                                </h1>
-                            </div>
+                                Smart Rentals
+                            </h1>
                         )}
                     </div>
 
@@ -173,33 +162,58 @@ export default function App() {
                             gap: "8px",
                         }}
                     >
-                        <Menu
-                            theme={"dark"}
-                            mode="horizontal"
-                            defaultSelectedKeys={["1"]}
-                            items={menuItems}
-                            style={{
-                                borderBottom: "none",
-                                background: "transparent",
-                                fontFamily: "cursive",
-                                minWidth: isSmallScreen ? "auto" : "500px",
-                                marginLeft: "20px",
-                                fontWeight: 700,
-                                flexWrap: "wrap",
-                            }}
-                        />
-                        <Modal
-                            title="Basic Modal"
-                            closable={{ "aria-label": "Custom Close Button" }}
-                            open={isModalOpen}
-                            onOk={handleOk}
-                            onCancel={handleCancel}
-                        >
-                            <p>Some contents...</p>
-                            <p>Some contents...</p>
-                            <p>Some contents...</p>
-                        </Modal>
-
+                        {isSmallScreen ? (
+                            <>
+                                <Button
+                                    type="text"
+                                    icon={<MenuOutlined />}
+                                    onClick={showDrawer}
+                                    style={{ color: "#fff" }}
+                                    aria-label="Open menu"
+                                />
+                                <Drawer
+                                    title="Menu"
+                                    placement="right"
+                                    onClose={closeDrawer}
+                                    open={isDrawerOpen}
+                                    width={250}
+                                    style={{
+                                        background: isDarkMode
+                                            ? "#1f1f1f"
+                                            : "#fff",
+                                    }}
+                                >
+                                    <Menu
+                                        theme={isDarkMode ? "dark" : "light"}
+                                        mode="vertical"
+                                        defaultSelectedKeys={["1"]}
+                                        items={menuItems}
+                                        style={{
+                                            background: isDarkMode
+                                                ? "#1f1f1f"
+                                                : "#fff",
+                                            color: isDarkMode ? "#fff" : "#000",
+                                            fontFamily: "cursive",
+                                            fontWeight: 700,
+                                        }}
+                                    />
+                                </Drawer>
+                            </>
+                        ) : (
+                            <Menu
+                                theme="dark"
+                                mode="horizontal"
+                                defaultSelectedKeys={["1"]}
+                                items={menuItems}
+                                style={{
+                                    borderBottom: "none",
+                                    background: "transparent",
+                                    fontFamily: "cursive",
+                                    fontWeight: 700,
+                                    flex: "0 1 auto",
+                                }}
+                            />
+                        )}
                         <span style={{ color: "#fff" }}>
                             {isDarkMode ? "Dark Mode" : "Light Mode"}
                         </span>
@@ -221,31 +235,33 @@ export default function App() {
                     }}
                 >
                     <div
-                        className="py-12 rounded-md mb-6 text-center "
+                        className="py-12 rounded-md mb-6 text-center"
                         style={{
                             background: isDarkMode ? "#262626" : "#ebf8ff",
                         }}
                     >
                         <h2
-                            className={`sm:text-xl md:text-3xl lg:text-5xl mb-1 ${
+                            className={`text-2xl sm:text-xl md:text-3xl lg:text-5xl mb-1 ${
                                 isDarkMode
                                     ? "text-white"
                                     : "bg-gradient-to-r from-blue-950 to-sky-800 bg-clip-text text-transparent"
                             }`}
                             style={{
                                 fontFamily: "Rubik Gemstones",
+                                textShadow: isDarkMode
+                                    ? "1px 1px 2px rgba(0, 0, 0, 0.5)"
+                                    : "none",
                             }}
                         >
                             Find the Perfect Flat & Roommate
                         </h2>
-
                         <p
                             className="mb-4 sm:text-md md:text-lg lg:text-xl font-bold"
                             style={{ fontFamily: "Indie Flower, cursive" }}
                         >
                             Smart rentals that match your lifestyle preferences.
                         </p>
-                        <div className="flex justify-center gap-2 mb-4">
+                        <div className="flex justify-center gap-2 mb-4 flex-wrap">
                             <Input
                                 placeholder="Location"
                                 style={{ width: 200 }}
@@ -270,8 +286,6 @@ export default function App() {
                         </div>
                     </div>
 
-                    {/* Statistics Cards */}
-                    {/* Statistics + Carousel Section */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
                         <Card
                             title={
@@ -282,7 +296,7 @@ export default function App() {
                                     Statistics
                                 </span>
                             }
-                            variant={"outlined"}
+                            variant="outlined"
                             className="h-full"
                         >
                             <Row gutter={16}>
@@ -332,11 +346,10 @@ export default function App() {
                         </div>
                     </div>
 
-                    {/* Flats Display Section */}
-                    <div className="flex gap-4">
-                        <div className="w-1/4">
+                    <div className="flex gap-4 flex-col md:flex-row">
+                        <div className="w-full md:w-1/4">
                             <h3
-                                className=" mb-2 sm:text-xl md:text-4xl"
+                                className="mb-2 sm:text-xl md:text-4xl"
                                 style={{ fontFamily: "Winky Rough" }}
                             >
                                 Filters
@@ -361,7 +374,7 @@ export default function App() {
 
                         <div className="flex-1">
                             <h3
-                                className=" sm:text-xl md:text-4xl  mb-2"
+                                className="sm:text-xl md:text-4xl mb-2"
                                 style={{ fontFamily: "Winky Rough" }}
                             >
                                 Listed Places
@@ -374,8 +387,12 @@ export default function App() {
                                             <img alt="flat" src={flat.image} />
                                         }
                                         actions={[
-                                            <Button>View Details</Button>,
-                                            <Button>Contact Owner</Button>,
+                                            <Button key="view">
+                                                View Details
+                                            </Button>,
+                                            <Button key="contact">
+                                                Contact Owner
+                                            </Button>,
                                         ]}
                                     >
                                         <Card.Meta
