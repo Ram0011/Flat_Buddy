@@ -160,6 +160,8 @@ export default function AnchorNavbar() {
                             display: "flex",
                             alignItems: "center",
                             gap: "8px",
+                            flex: 1,
+                            justifyContent: "flex-end",
                         }}
                     >
                         {isSmallScreen ? (
@@ -205,12 +207,15 @@ export default function AnchorNavbar() {
                                 mode="horizontal"
                                 defaultSelectedKeys={["1"]}
                                 items={menuItems}
+                                overflowedIndicator={null}
                                 style={{
                                     borderBottom: "none",
                                     background: "transparent",
                                     fontFamily: "cursive",
                                     fontWeight: 700,
-                                    flex: "0 1 auto",
+                                    flex: 1,
+                                    justifyContent: "flex-end",
+                                    lineHeight: "64px",
                                 }}
                             />
                         )}
