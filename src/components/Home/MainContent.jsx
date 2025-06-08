@@ -23,26 +23,26 @@ const formatter = (value) => <CountUp end={value} separator="," />;
 // Sample data for flats
 const flats = [
     {
-        title: "Downtown Seattle",
-        price: "$2000/month",
+        title: "Shivaji Nagar",
+        price: "₹30000/month",
         image: "https://th.bing.com/th/id/R.bf3f2f0ab470b6ae0acd69d3366b8e71?rik=zDfPdp%2fp8597XA&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f10%2fPhotos-Apartment-HD.jpg&ehk=68xff7gTwc8dN2zuON1jZ0soOcByscrd6C9hwSszjyw%3d&risl=&pid=ImgRaw&r=0",
         features: ["WiFi", "AC", "Furnished"],
     },
     {
-        title: "City Center Platz",
-        price: "$1800/month",
+        title: "Kothrud",
+        price: "₹19000/month",
         image: "https://www.phillyaptrentals.com/wp-content/uploads/2020/12/apartment-building-what-makes-good-apartment-building-scaled.jpg",
         features: ["WiFi", "Washer", "Pet-friendly"],
     },
     {
-        title: "Lakeview Condo",
-        price: "$2200/month",
+        title: "Viman Nagar",
+        price: "₹20000/month",
         image: "https://static.giggster.com/images/location/ca5202c1-854f-4eb2-83c0-635c5f1e01e4/d859ba35-e9fa-474f-8b44-dfe8ae061b22/full_hd_retina.jpeg",
         features: ["Balcony", "Gym", "Parking"],
     },
     {
-        title: "Urban Loft",
-        price: "$1900/month",
+        title: "Hinjawadi Phase 2",
+        price: "₹25000/month",
         image: "https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://www.glenwoodnyc.com/wp-content/uploads/2022/05/2-JSP-LOBBY-01-02-1280.jpg",
         features: ["WiFi", "Dishwasher", "Central Heating"],
     },
@@ -51,22 +51,22 @@ const flats = [
 // Sample data for roommates
 const roommates = [
     {
-        name: "Alex Johnson",
+        name: "Sakshi Singh",
         preferences: "Non-smoker, Quiet, Works remotely",
         details: ["25 years old", "Loves hiking", "No pets"],
     },
     {
-        name: "Sarah Lee",
+        name: "Abhishek Kapadnis",
         preferences: "Pet-friendly, Social, Clean",
         details: ["28 years old", "Has a cat", "Enjoys cooking"],
     },
     {
-        name: "Michael Chen",
+        name: "Sarang Patil",
         preferences: "Night owl, Gamer, Tidy",
         details: ["30 years old", "No pets", "Freelancer"],
     },
     {
-        name: "Emily Davis",
+        name: "Trupti Gupta",
         preferences: "Early riser, Fitness enthusiast, Organized",
         details: ["27 years old", "Vegan", "No smoking"],
     },
