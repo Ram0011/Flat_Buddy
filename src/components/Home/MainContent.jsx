@@ -179,7 +179,7 @@ const MainContent = ({ isDarkMode }) => {
 
             {/* Filters and Listings Section */}
             <div className="flex gap-4 flex-col md:flex-row">
-                <div className="w-full md:w-1/4">
+                <div className="w-full md:w-1/4 mb-6 md:mb-0">
                     <h3
                         className="mb-2 text-2xl md:text-4xl text-gray-700"
                         style={{ fontFamily: "Roboto" }}
@@ -231,7 +231,7 @@ const MainContent = ({ isDarkMode }) => {
 
                 <div className="flex-1">
                     <h3
-                        className="sm:text-xl md:text-4xl mb-2"
+                        className="text-3xl md:text-4xl mb-2"
                         style={{
                             fontFamily: "Roboto",
                             fontWeight: "bold",
@@ -295,7 +295,7 @@ const MainContent = ({ isDarkMode }) => {
                     </div>
 
                     <h3
-                        className="sm:text-xl md:text-4xl mb-2"
+                        className="text-3xl md:text-4xl mb-2"
                         style={{
                             fontFamily: "Roboto",
                             fontWeight: "bold",
