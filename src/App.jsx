@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ConfigProvider, theme } from "antd";
 import { Routes, Route } from "react-router-dom";
-import AnchorNavbar from "./components/Home/AnchorNavbar.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
+import HomePage from "./pages/HomePage.jsx";
 
 function App() {
     const { defaultAlgorithm, darkAlgorithm } = theme;
@@ -18,7 +18,7 @@ function App() {
                 <Route
                     path="/"
                     element={
-                        <AnchorNavbar
+                        <HomePage
                             isDarkMode={isDarkMode}
                             setIsDarkMode={setIsDarkMode}
                         />
