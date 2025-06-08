@@ -291,7 +291,9 @@ const MainContent = ({ isDarkMode }) => {
                         ))}
                     </div>
                     <div className="text-center mb-8">
-                        <Button type="default">Show More</Button>
+                        <Button variant="outlined" color="primary">
+                            Show More
+                        </Button>
                     </div>
 
                     <h3
@@ -365,7 +367,9 @@ const MainContent = ({ isDarkMode }) => {
                         ))}
                     </div>
                     <div className="text-center mb-8">
-                        <Button type="default">Show More</Button>
+                        <Button variant="outlined" color="primary">
+                            Show More
+                        </Button>
                     </div>
                 </div>
             </div>
