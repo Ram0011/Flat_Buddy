@@ -51,7 +51,7 @@ const flats = [
 // Sample data for roommates
 const roommates = [
     {
-        name: "Sakshi Singh",
+        name: "Mangesh Honrao",
         preferences: "Non-smoker, Quiet, Works remotely",
         details: ["25 years old", "Loves hiking", "No pets"],
     },
