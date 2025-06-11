@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { ConfigProvider, theme, Modal, Layout } from "antd";
-import HeaderComponent from "../components/Home/HeaderComponent.jsx";
-import HeroSection from "../components/Home/HeroSection.jsx";
-import MainContent from "../components/Home/MainContent.jsx";
-import FooterComponent from "../components/Home/FooterComponent.jsx";
+import HeaderComponent from "../../components/Home/HeaderComponent.jsx";
+import HeroSection from "../../components/Home/HeroSection.jsx";
+import MainContent from "../../components/Home/MainContent.jsx";
+import FooterComponent from "../../components/Home/FooterComponent.jsx";
 
 const { defaultAlgorithm, darkAlgorithm } = theme;
 const { Content } = Layout;
 
-const HomePage = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+const HomePage = ({ isDarkMode, setIsDarkMode }) => {
     const [isSmallScreen, setIsSmallScreen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -46,7 +45,7 @@ const HomePage = () => {
 
     // Toggle dark mode
     const handleToggleDarkMode = () => {
-        setIsDarkMode((prev) => !prev);
+        setIsDarkMode(!isDarkMode);
     };
 
     return (
@@ -55,7 +54,13 @@ const HomePage = () => {
                 algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
             }}
         >
-            <Layout style={{ minHeight: "100vh" }}>
+            <Layout
+                style={{
+                    minHeight: "100vh",
+                    width: "100vw",
+                    overflow: "hidden",
+                }}
+            >
                 <HeaderComponent
                     isDarkMode={isDarkMode}
                     isSmallScreen={isSmallScreen}
@@ -66,11 +71,14 @@ const HomePage = () => {
                     closeDrawer={closeDrawer}
                 />
                 <Content
-                    className="p-4 overflow-scroll"
+                    className="p-4"
                     style={{
                         background: isDarkMode ? "#1f1f1f" : "#fff",
                         color: isDarkMode ? "#fff" : "#000",
                         paddingTop: "20px",
+                        overflow: "auto", // Only show scrollbars when needed
+                        boxSizing: "border-box", // Include padding in width calculations
+                        maxWidth: "100%", // Prevent content from exceeding viewport
                     }}
                 >
                     <HeroSection isDarkMode={isDarkMode} />

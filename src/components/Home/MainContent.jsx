@@ -13,12 +13,27 @@ import {
 import { UserOutlined } from "@ant-design/icons";
 import CountUp from "react-countup";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 // Import Card.Meta explicitly
 const { Meta: CardMeta } = Card;
 
 // Formatter for CountUp component
 const formatter = (value) => <CountUp end={value} separator="," />;
+
+// Animation variants
+const slideUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.2, delayChildren: 0.3 },
+    },
+};
 
 // Sample data for flats
 const flats = [
@@ -96,16 +111,21 @@ const MainContent = ({ isDarkMode }) => {
     };
 
     return (
-        <div>
-            {/* Statistics and Carousel Section */}
+        <div
+            className={
+                isDarkMode ? "bg-gray-900 text-white" : "bg-white text-gray-800"
+            }
+        >
+            {/* Statistics and Carousel Section - No Framer Motion */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
                 <Card
                     title={
                         <span
-                            className="text-2xl font-semibold"
+                            className="text-2xl md:text-3xl font-semibold"
                             style={{
                                 fontFamily: "Roboto",
                                 fontWeight: "bold",
+                                color: isDarkMode ? "#fff" : "#000",
                             }}
                         >
                             Statistics
@@ -113,6 +133,7 @@ const MainContent = ({ isDarkMode }) => {
                     }
                     variant="outlined"
                     className="h-full"
+                    style={{ background: isDarkMode ? "#2f2f2f" : "#fff" }}
                 >
                     <Row gutter={16}>
                         <Col span={12}>
@@ -122,6 +143,7 @@ const MainContent = ({ isDarkMode }) => {
                                 formatter={formatter}
                                 style={{
                                     fontFamily: "Roboto",
+                                    color: isDarkMode ? "#fff" : "#000",
                                 }}
                             />
                         </Col>
@@ -133,6 +155,7 @@ const MainContent = ({ isDarkMode }) => {
                                 formatter={formatter}
                                 style={{
                                     fontFamily: "Roboto",
+                                    color: isDarkMode ? "#fff" : "#000",
                                 }}
                             />
                         </Col>
@@ -145,18 +168,30 @@ const MainContent = ({ isDarkMode }) => {
                                 style={{
                                     fontFamily: "Roboto",
                                     paddingTop: "16px",
+                                    color: isDarkMode ? "#fff" : "#000",
                                 }}
                             />
                         </Col>
                     </Row>
                 </Card>
                 <div className="sm:col-span-2">
-                    <Card variant="outlined" className="h-full">
+                    <Card
+                        variant="outlined"
+                        className="h-full"
+                        style={{ background: isDarkMode ? "#2f2f2f" : "#fff" }}
+                    >
                         <Carousel autoplay dotPosition="bottom">
                             {flats.slice(0, 4).map((flat, index) => (
                                 <div key={index}>
                                     <div className="text-center">
-                                        <h3 className="text-lg mb-2">
+                                        <h3
+                                            className="text-xl md:text-3xl mb-2 font-bold"
+                                            style={{
+                                                color: isDarkMode
+                                                    ? "#fff"
+                                                    : "#000",
+                                            }}
+                                        >
                                             {flat.title}
                                         </h3>
                                         <img
@@ -181,13 +216,23 @@ const MainContent = ({ isDarkMode }) => {
             <div className="flex gap-4 flex-col md:flex-row">
                 <div className="w-full md:w-1/4 mb-6 md:mb-0">
                     <h3
-                        className="mb-2 text-2xl md:text-4xl text-gray-700"
-                        style={{ fontFamily: "Roboto" }}
+                        className="mb-2 text-2xl md:text-4xl"
+                        style={{
+                            fontFamily: "Roboto",
+                            color: isDarkMode ? "#fff" : "#000",
+                        }}
                     >
                         Filters
                     </h3>
                     <div className="flex flex-col gap-2">
-                        <p>Budget Range</p>
+                        <p
+                            style={{
+                                color: isDarkMode ? "#d1d5db" : "#6b7280",
+                            }}
+                            className="text-lg font-semibold"
+                        >
+                            Budget Range
+                        </p>
                         <Slider
                             range
                             min={3500}
@@ -221,10 +266,23 @@ const MainContent = ({ isDarkMode }) => {
                         </div>
                         <Input placeholder="City / Area" />
                         <div>
-                            <Checkbox>Pet-friendly</Checkbox>
+                            <Checkbox
+                                style={{
+                                    color: isDarkMode ? "#d1d5db" : "#6b7280",
+                                }}
+                                className="text-lg md:text-xl"
+                            >
+                                Pet-friendly
+                            </Checkbox>
                         </div>
                         <div>
-                            <Checkbox>Smoking allowed</Checkbox>
+                            <Checkbox
+                                style={{
+                                    color: isDarkMode ? "#d1d5db" : "#6b7280",
+                                }}
+                            >
+                                Smoking allowed
+                            </Checkbox>
                         </div>
                     </div>
                 </div>
@@ -235,65 +293,101 @@ const MainContent = ({ isDarkMode }) => {
                         style={{
                             fontFamily: "Roboto",
                             fontWeight: "bold",
+                            color: isDarkMode ? "#fff" : "#000",
                         }}
                     >
                         Listed Places
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <motion.div
+                        className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={staggerContainer}
+                    >
                         {flats.slice(0, 4).map((flat, index) => (
-                            <Card
+                            <motion.div
                                 key={index}
-                                cover={
-                                    <img
-                                        alt="flat"
-                                        src={flat.image}
-                                        style={{
-                                            width: "100%",
-                                            height: "200px",
-                                            objectFit: "cover",
-                                            borderRadius: "8px 8px 0 0",
-                                        }}
-                                    />
-                                }
-                                actions={[
-                                    <Button key="view">View Details</Button>,
-                                    <Button key="contact">
-                                        Contact Owner
-                                    </Button>,
-                                ]}
-                                style={{
-                                    height: "100%",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
-                                styles={{
-                                    body: {
-                                        flex: 1,
+                                variants={slideUp}
+                                whileHover={{ scale: 1.04 }}
+                                whileTap={{ scale: 1 }}
+                            >
+                                <Card
+                                    cover={
+                                        <img
+                                            alt="flat"
+                                            src={flat.image}
+                                            style={{
+                                                width: "100%",
+                                                height: "200px",
+                                                objectFit: "cover",
+                                                borderRadius: "8px 8px 0 0",
+                                            }}
+                                        />
+                                    }
+                                    actions={[
+                                        <Button key="view">
+                                            View Details
+                                        </Button>,
+                                        <Button key="contact">
+                                            Contact Owner
+                                        </Button>,
+                                    ]}
+                                    style={{
+                                        height: "100%",
                                         display: "flex",
                                         flexDirection: "column",
-                                        justifyContent: "space-between",
-                                    },
-                                }}
-                                variant="outlined"
-                            >
-                                <CardMeta
-                                    title={flat.title}
-                                    description={
-                                        <div>
-                                            <p>{flat.price}</p>
-                                            <p className="text-sm text-gray-500">
-                                                {flat.features.join(", ")}
-                                            </p>
-                                        </div>
-                                    }
-                                />
-                            </Card>
+                                        background: isDarkMode
+                                            ? "#2f2f2f"
+                                            : "#fff",
+                                    }}
+                                    styles={{
+                                        body: {
+                                            flex: 1,
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "space-between",
+                                        },
+                                    }}
+                                    variant="outlined"
+                                >
+                                    <CardMeta
+                                        title={flat.title}
+                                        description={
+                                            <div>
+                                                <p
+                                                    style={{
+                                                        color: isDarkMode
+                                                            ? "#d1d5db"
+                                                            : "#6b7280",
+                                                    }}
+                                                >
+                                                    {flat.price}
+                                                </p>
+                                                <p
+                                                    className="text-sm"
+                                                    style={{
+                                                        color: isDarkMode
+                                                            ? "#9ca3af"
+                                                            : "#6b7280",
+                                                    }}
+                                                >
+                                                    {flat.features.join(", ")}
+                                                </p>
+                                            </div>
+                                        }
+                                    />
+                                </Card>
+                            </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
                     <div className="text-center mb-8">
-                        <Button variant="outlined" color="primary">
-                            Show More
-                        </Button>
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ duration: 0.2 }}
+                        >
+                            <Button type="default">Show More</Button>
+                        </motion.div>
                     </div>
 
                     <h3
@@ -301,75 +395,113 @@ const MainContent = ({ isDarkMode }) => {
                         style={{
                             fontFamily: "Roboto",
                             fontWeight: "bold",
+                            color: isDarkMode ? "#fff" : "#000",
                         }}
                     >
                         Listed Roommates
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <motion.div
+                        className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={staggerContainer}
+                    >
                         {roommates.slice(0, 4).map((roommate, index) => (
-                            <Card
+                            <motion.div
                                 key={index}
-                                cover={
-                                    <div
-                                        style={{
-                                            width: "100%",
-                                            height: "200px",
-                                            display: "flex",
-                                            alignItems: "center",
-                                            justifyContent: "center",
-                                            background: isDarkMode
-                                                ? "#2f2f2f"
-                                                : "#f0f0f0",
-                                            borderRadius: "8px 8px 0 0",
-                                        }}
-                                    >
-                                        <UserOutlined
-                                            style={{
-                                                fontSize: "80px",
-                                                color: isDarkMode
-                                                    ? "#fff"
-                                                    : "#000",
-                                            }}
-                                        />
-                                    </div>
-                                }
-                                actions={[
-                                    <Button key="view">View Profile</Button>,
-                                    <Button key="contact">Contact</Button>,
-                                ]}
-                                style={{
-                                    height: "100%",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
-                                styles={{
-                                    body: {
-                                        flex: 1,
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "space-between",
-                                    },
-                                }}
-                                variant="outlined"
+                                variants={slideUp}
+                                whileHover={{ scale: 1.04 }}
+                                whileTap={{ scale: 1 }}
                             >
-                                <CardMeta
-                                    title={roommate.name}
-                                    description={
-                                        <div>
-                                            <p>{roommate.preferences}</p>
-                                            <p className="text-sm text-gray-500">
-                                                {roommate.details.join(", ")}
-                                            </p>
+                                <Card
+                                    cover={
+                                        <div
+                                            style={{
+                                                width: "100%",
+                                                height: "200px",
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                                background: isDarkMode
+                                                    ? "#2f2f2f"
+                                                    : "#f0f0f0",
+                                                borderRadius: "8px 8px 0 0",
+                                            }}
+                                        >
+                                            <UserOutlined
+                                                style={{
+                                                    fontSize: "80px",
+                                                    color: isDarkMode
+                                                        ? "#fff"
+                                                        : "#000",
+                                                }}
+                                            />
                                         </div>
                                     }
-                                />
-                            </Card>
+                                    actions={[
+                                        <Button key="view">
+                                            View Profile
+                                        </Button>,
+                                        <Button key="contact">Contact</Button>,
+                                    ]}
+                                    style={{
+                                        height: "100%",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        background: isDarkMode
+                                            ? "#2f2f2f"
+                                            : "#fff",
+                                    }}
+                                    styles={{
+                                        body: {
+                                            flex: 1,
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "space-between",
+                                        },
+                                    }}
+                                    variant="outlined"
+                                >
+                                    <CardMeta
+                                        title={roommate.name}
+                                        description={
+                                            <div>
+                                                <p
+                                                    style={{
+                                                        color: isDarkMode
+                                                            ? "#d1d5db"
+                                                            : "#6b7280",
+                                                    }}
+                                                >
+                                                    {roommate.preferences}
+                                                </p>
+                                                <p
+                                                    className="text-sm"
+                                                    style={{
+                                                        color: isDarkMode
+                                                            ? "#9ca3af"
+                                                            : "#6b7280",
+                                                    }}
+                                                >
+                                                    {roommate.details.join(
+                                                        ", "
+                                                    )}
+                                                </p>
+                                            </div>
+                                        }
+                                    />
+                                </Card>
+                            </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
                     <div className="text-center mb-8">
-                        <Button variant="outlined" color="primary">
-                            Show More
-                        </Button>
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ duration: 0.2 }}
+                        >
+                            <Button type="default">Show More</Button>
+                        </motion.div>
                     </div>
                 </div>
             </div>

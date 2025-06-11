@@ -69,8 +69,8 @@ const HeaderComponent = ({
                     <h1
                         style={{
                             margin: 0,
-                            fontFamily: "Permanent Marker",
-                            fontSize: isSmallScreen ? "1.5rem" : "2.5rem",
+                            fontFamily: "Edu NSW ACT Hand Prescript, cursive",
+                            fontSize: isSmallScreen ? "1.5rem" : "2.3rem",
                             fontWeight: "bold",
                             color: "#fff",
                             textShadow: isDarkMode
@@ -135,9 +135,10 @@ const HeaderComponent = ({
                         style={{
                             borderBottom: "none",
                             background: "transparent",
-                            fontFamily: "cursive",
-                            fontWeight: 700,
+                            fontFamily: "Roboto",
+                            fontWeight: 400,
                             flex: 1,
+                            fontSize: "15px",
                             justifyContent: "flex-end",
                             lineHeight: "64px",
                         }}

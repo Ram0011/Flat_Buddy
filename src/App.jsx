@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { ConfigProvider, theme } from "antd";
 import { Routes, Route } from "react-router-dom";
-import LoginPage from "./pages/LoginPage.jsx";
-import HomePage from "./pages/HomePage.jsx";
+import LoginPage from "./pages/Authentication/LoginPage.jsx";
+import HomePage from "./pages/Home/HomePage.jsx";
+import IntroPage from "./pages/Intro/IntroPage.jsx";
 
 function App() {
     const { defaultAlgorithm, darkAlgorithm } = theme;
@@ -17,6 +18,15 @@ function App() {
             <Routes>
                 <Route
                     path="/"
+                    element={
+                        <IntroPage
+                            isDarkMode={isDarkMode}
+                            setIsDarkMode={setIsDarkMode}
+                        />
+                    }
+                />
+                <Route
+                    path="/home"
                     element={
                         <HomePage
                             isDarkMode={isDarkMode}
