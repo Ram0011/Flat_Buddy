@@ -115,6 +115,12 @@ const MainContent = ({ isDarkMode }) => {
             className={
                 isDarkMode ? "bg-gray-900 text-white" : "bg-white text-gray-800"
             }
+            style={{
+                maxWidth: "100%",
+                margin: "0 auto",
+                padding: "0 16px",
+                boxSizing: "border-box",
+            }}
         >
             {/* Statistics and Carousel Section - No Framer Motion */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">

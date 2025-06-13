@@ -54,17 +54,11 @@ const HeaderComponent = ({
             key: "2",
             icon: <UserOutlined />,
             label: "My Requests",
-            onClick: () => {
-                navigate("/requests");
-            },
         },
         {
             key: "3",
             icon: <ApartmentOutlined />,
             label: "Listings",
-            onClick: () => {
-                navigate("/listings");
-            },
         },
         {
             key: "4",
@@ -75,7 +69,7 @@ const HeaderComponent = ({
     ];
 
     const handleToggleDarkMode = () => {
-        setIsDarkMode((prev) => !prev);
+        setIsDarkMode((prev) => !prev); // Ensure state toggle
     };
 
     return (

@@ -15,7 +15,7 @@ const FooterComponent = ({ isDarkMode }) => {
             <div>
                 <h3
                     style={{
-                        fontFamily: "Permanent Marker",
+                        fontFamily: "Edu NSW ACT Hand Prescript, cursive",
                         fontSize: "clamp(1.2rem, 2.5vw, 1.8rem)",
                         marginBottom: "38px",
                     }}

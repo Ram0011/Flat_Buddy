@@ -26,7 +26,7 @@ const HeroSection = ({ isDarkMode }) => {
             variants={staggerContainer}
         >
             <motion.h2
-                className={`text-3xl md:text-3xl  lg:text-6xl ${
+                className={`text-3xl md:text-3xl  lg:text-6xl py-5 ${
                     isDarkMode
                         ? "text-white"
                         : "bg-gradient-to-r from-blue-950 to-sky-800 bg-clip-text text-transparent"
@@ -43,7 +43,7 @@ const HeroSection = ({ isDarkMode }) => {
                 Find the Perfect Flat & Roommate
             </motion.h2>
             <motion.p
-                className="mb-4 sm:text-xl md:text-2xl lg:text-3xl font-bold"
+                className="my-4 sm:text-xl md:text-2xl lg:text-3xl font-bold"
                 style={{
                     fontFamily: "Roboto, sans-serif",
                     fontWeight: 300,

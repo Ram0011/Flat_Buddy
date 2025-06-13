@@ -4,11 +4,13 @@ import HeaderComponent from "../../components/Home/HeaderComponent.jsx";
 import HeroSection from "../../components/Home/HeroSection.jsx";
 import MainContent from "../../components/Home/MainContent.jsx";
 import FooterComponent from "../../components/Home/FooterComponent.jsx";
+import { useNavigate } from "react-router-dom";
 
 const { defaultAlgorithm, darkAlgorithm } = theme;
 const { Content } = Layout;
 
 const HomePage = ({ isDarkMode, setIsDarkMode }) => {
+    const navigate = useNavigate();
     const [isSmallScreen, setIsSmallScreen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -19,7 +21,9 @@ const HomePage = ({ isDarkMode, setIsDarkMode }) => {
     };
 
     const handleOk = () => {
+        console.log("User logged out - navigating to /login");
         setIsModalOpen(false);
+        setTimeout(() => navigate("/login"), 0);
     };
 
     const handleCancel = () => {
