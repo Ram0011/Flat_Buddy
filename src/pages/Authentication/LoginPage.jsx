@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Modal, message } from "antd";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import HeaderComponent from "../../components/Login/HeaderComponent";
+import HeaderComponent from "../../components/Navbar/HomeNavbar";
 import ContentComponent from "../../components/Login/ContentComponent";
 
 // Animation variants for modal

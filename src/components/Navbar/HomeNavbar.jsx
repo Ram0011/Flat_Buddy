@@ -7,7 +7,7 @@ import {
     MenuOutlined,
 } from "@ant-design/icons";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const { Header } = Layout;
 
@@ -40,6 +40,7 @@ const HeaderComponent = ({
     closeDrawer,
 }) => {
     const navigate = useNavigate();
+    const location = useLocation();
 
     const menuItems = [
         {
@@ -53,7 +54,10 @@ const HeaderComponent = ({
         {
             key: "2",
             icon: <UserOutlined />,
-            label: "My Requests",
+            label: "My Profile",
+            onClick: () => {
+                navigate("/profile");
+            },
         },
         {
             key: "3",
@@ -71,8 +75,23 @@ const HeaderComponent = ({
         },
     ];
 
+    // Map current route to menu key
+    const getSelectedKey = () => {
+        const path = location.pathname;
+        switch (path) {
+            case "/":
+                return "1"; // Home
+            case "/profile":
+                return "2"; // My Profile
+            case "/listings":
+                return "3"; // Listings
+            default:
+                return "1"; // Default to Home for unmatched routes
+        }
+    };
+
     const handleToggleDarkMode = () => {
-        setIsDarkMode((prev) => !prev); // Ensure state toggle
+        setIsDarkMode((prev) => !prev);
     };
 
     return (
@@ -88,17 +107,12 @@ const HeaderComponent = ({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    overflowX: "hidden",
+                    width: "100%",
                 }}
             >
                 <motion.div
                     variants={fadeIn}
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                        cursor: "pointer",
-                    }}
-                    onClick={() => navigate("/")}
+                    style={{ display: "flex", alignItems: "center" }}
                 >
                     <motion.img
                         variants={fadeIn}
@@ -134,9 +148,7 @@ const HeaderComponent = ({
                     style={{
                         display: "flex",
                         alignItems: "center",
-                        gap: "8px",
-                        flex: 1,
-                        justifyContent: "flex-end",
+                        gap: "16px",
                     }}
                 >
                     {isSmallScreen ? (
@@ -170,7 +182,7 @@ const HeaderComponent = ({
                                     <Menu
                                         theme={isDarkMode ? "dark" : "light"}
                                         mode="vertical"
-                                        defaultSelectedKeys={["1"]}
+                                        selectedKeys={[getSelectedKey()]}
                                         items={menuItems}
                                         style={{
                                             background: isDarkMode
@@ -189,18 +201,17 @@ const HeaderComponent = ({
                             <Menu
                                 theme="dark"
                                 mode="horizontal"
-                                defaultSelectedKeys={["1"]}
+                                selectedKeys={[getSelectedKey()]}
                                 items={menuItems}
-                                overflowedIndicator={null}
                                 style={{
                                     borderBottom: "none",
                                     background: "transparent",
                                     fontFamily: "Roboto",
                                     fontWeight: 400,
-                                    flex: 1,
                                     fontSize: "15px",
-                                    justifyContent: "flex-end",
                                     lineHeight: "64px",
+                                    flex: "0 1 auto",
+                                    minWidth: 0,
                                 }}
                             />
                         </motion.div>

@@ -89,7 +89,7 @@ const HeroSection = ({ isDarkMode }) => {
                     <Button
                         type="default"
                         size="large"
-                        onClick={() => navigate("/login")}
+                        onClick={() => navigate("/login?tab=signup")} // Updated to include query parameter
                         className={
                             isDarkMode
                                 ? "bg-gray-700 text-white"

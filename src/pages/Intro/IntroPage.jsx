@@ -1,14 +1,12 @@
-import HeaderComponent from "../../components/Home/HeaderComponent";
+import React, { useState, useEffect } from "react";
+import { Modal } from "antd";
+import HeaderComponent from "../../components/Navbar/HomeNavbar";
 import HeroSection from "../../components/Intro/HeroSection";
 import FeatureSection from "../../components/Intro/FeatureSection";
 import HowItWorksSection from "../../components/Intro/HowItWorksSection";
 import TestimonialSection from "../../components/Intro/TestimonialSection";
 import FooterComponent from "../../components/Home/FooterComponent";
-import { useEffect, useState } from "react";
-import { theme, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
-
-const { defaultAlgorithm, darkAlgorithm } = theme;
 
 const IntroPage = ({ isDarkMode, setIsDarkMode }) => {
     const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -48,11 +46,6 @@ const IntroPage = ({ isDarkMode, setIsDarkMode }) => {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    // Toggle dark mode
-    const handleToggleDarkMode = () => {
-        setIsDarkMode(!isDarkMode);
-    };
-
     return (
         <div
             className={`flex flex-col min-h-screen ${
@@ -61,8 +54,8 @@ const IntroPage = ({ isDarkMode, setIsDarkMode }) => {
         >
             <HeaderComponent
                 isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
                 isSmallScreen={isSmallScreen}
-                handleToggleDarkMode={handleToggleDarkMode}
                 showModal={showModal}
                 showDrawer={showDrawer}
                 isDrawerOpen={isDrawerOpen}

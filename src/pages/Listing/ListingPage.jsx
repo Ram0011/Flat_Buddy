@@ -13,7 +13,7 @@ import {
 } from "antd";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import HeaderComponent from "../../components/Login/HeaderComponent";
+import HeaderComponent from "../../components/Navbar/HomeNavbar";
 
 const { Content } = Layout;
 

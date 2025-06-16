@@ -5,6 +5,7 @@ import LoginPage from "./pages/Authentication/LoginPage.jsx";
 import HomePage from "./pages/Home/HomePage.jsx";
 import IntroPage from "./pages/Intro/IntroPage.jsx";
 import ListingPage from "./pages/Listing/ListingPage.jsx";
+import ProfilePage from "./pages/Profile/ProfilePage.jsx";
 
 function App() {
     const { defaultAlgorithm, darkAlgorithm } = theme;
@@ -48,6 +49,15 @@ function App() {
                     path="/listings"
                     element={
                         <ListingPage
+                            isDarkMode={isDarkMode}
+                            setIsDarkMode={setIsDarkMode}
+                        />
+                    }
+                />
+                <Route
+                    path="/profile"
+                    element={
+                        <ProfilePage
                             isDarkMode={isDarkMode}
                             setIsDarkMode={setIsDarkMode}
                         />

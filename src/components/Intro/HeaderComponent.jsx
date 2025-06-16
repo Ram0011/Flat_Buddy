@@ -18,13 +18,18 @@ const HeaderComponent = ({ isDarkMode, setIsDarkMode }) => {
         >
             <div className="container mx-auto flex justify-between items-center">
                 <div
-                    className="flex items-center cursor-pointer"
-                    onClick={() => navigate("/")}
+                    className="flex items-center cursor-pointer border-2 border-transparent hover:border-red-500"
+                    onClick={() => {
+                        console.log("Logo clicked, navigating to /");
+                        navigate("/");
+                    }}
                 >
                     <img
                         src="/logo.svg"
                         alt="Smart Rentals Logo"
                         className="h-8 mr-2"
+                        style={{ pointerEvents: "none" }} // Prevent image from capturing clicks
+                        onError={() => console.error("Failed to load logo.svg")}
                     />
                     <h1
                         style={{

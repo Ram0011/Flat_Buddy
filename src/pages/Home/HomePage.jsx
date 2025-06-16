@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ConfigProvider, theme, Modal, Layout } from "antd";
-import HeaderComponent from "../../components/Home/HeaderComponent.jsx";
+import HeaderComponent from "../../components/Navbar/HomeNavbar.jsx";
 import HeroSection from "../../components/Home/HeroSection.jsx";
 import MainContent from "../../components/Home/MainContent.jsx";
 import FooterComponent from "../../components/Home/FooterComponent.jsx";

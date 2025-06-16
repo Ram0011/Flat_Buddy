@@ -1,10 +1,10 @@
 import { Tabs, Layout } from "antd";
 import { motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 
 const { Content } = Layout;
-const { TabPane } = Tabs;
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -12,6 +12,36 @@ const containerVariants = {
 };
 
 const ContentComponent = ({ isDarkMode, navigate, setLoading, loading }) => {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const activeTab = queryParams.get("tab") === "signup" ? "signup" : "login";
+
+    const tabItems = [
+        {
+            key: "login",
+            label: "Login",
+            children: (
+                <LoginForm
+                    isDarkMode={isDarkMode}
+                    navigate={navigate}
+                    setLoading={setLoading}
+                    loading={loading}
+                />
+            ),
+        },
+        {
+            key: "signup",
+            label: "Sign Up",
+            children: (
+                <SignupForm
+                    isDarkMode={isDarkMode}
+                    setLoading={setLoading}
+                    loading={loading}
+                />
+            ),
+        },
+    ];
+
     return (
         <motion.div
             initial="hidden"
@@ -35,7 +65,7 @@ const ContentComponent = ({ isDarkMode, navigate, setLoading, loading }) => {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
-                    filter: "blur(6px) ",
+                    filter: "blur(6px)",
                     zIndex: 1,
                     overflow: "hidden",
                 }}
@@ -83,29 +113,17 @@ const ContentComponent = ({ isDarkMode, navigate, setLoading, loading }) => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.4 }}
-                        className="mb-4 sm:text-md md:text-lg lg:text-xl "
+                        className="mb-4 sm:text-md md:text-lg lg:text-xl"
                         style={{ fontFamily: "Nunito Sans, sans-serif" }}
                     >
                         Access or create your account to find the perfect flat
                         and roommate.
                     </motion.p>
-                    <Tabs defaultActiveKey="login" centered>
-                        <TabPane tab="Login" key="login">
-                            <LoginForm
-                                isDarkMode={isDarkMode}
-                                navigate={navigate}
-                                setLoading={setLoading}
-                                loading={loading}
-                            />
-                        </TabPane>
-                        <TabPane tab="Sign Up" key="signup">
-                            <SignupForm
-                                isDarkMode={isDarkMode}
-                                setLoading={setLoading}
-                                loading={loading}
-                            />
-                        </TabPane>
-                    </Tabs>
+                    <Tabs
+                        defaultActiveKey={activeTab}
+                        centered
+                        items={tabItems}
+                    />
                 </div>
             </Content>
         </motion.div>
