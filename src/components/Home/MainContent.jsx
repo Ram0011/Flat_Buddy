@@ -14,6 +14,7 @@ import { UserOutlined } from "@ant-design/icons";
 import CountUp from "react-countup";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 // Import Card.Meta explicitly
 const { Meta: CardMeta } = Card;
@@ -90,6 +91,7 @@ const roommates = [
 const MainContent = ({ isDarkMode }) => {
     // State for budget range
     const [budgetRange, setBudgetRange] = useState([3500, 30000]);
+    const navigate = useNavigate();
 
     // Handle slider change
     const handleSliderChange = (value) => {
@@ -506,7 +508,12 @@ const MainContent = ({ isDarkMode }) => {
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.2 }}
                         >
-                            <Button type="default">Show More</Button>
+                            <Button
+                                type="default"
+                                onClick={() => navigate("/roommates")}
+                            >
+                                Show More
+                            </Button>
                         </motion.div>
                     </div>
                 </div>

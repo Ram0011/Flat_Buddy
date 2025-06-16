@@ -47,11 +47,6 @@ const HomePage = ({ isDarkMode, setIsDarkMode }) => {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    // Toggle dark mode
-    const handleToggleDarkMode = () => {
-        setIsDarkMode(!isDarkMode);
-    };
-
     return (
         <ConfigProvider
             theme={{
@@ -67,8 +62,8 @@ const HomePage = ({ isDarkMode, setIsDarkMode }) => {
             >
                 <HeaderComponent
                     isDarkMode={isDarkMode}
+                    setIsDarkMode={setIsDarkMode}
                     isSmallScreen={isSmallScreen}
-                    handleToggleDarkMode={handleToggleDarkMode}
                     showModal={showModal}
                     showDrawer={showDrawer}
                     isDrawerOpen={isDrawerOpen}
@@ -80,9 +75,9 @@ const HomePage = ({ isDarkMode, setIsDarkMode }) => {
                         background: isDarkMode ? "#1f1f1f" : "#fff",
                         color: isDarkMode ? "#fff" : "#000",
                         paddingTop: "20px",
-                        overflow: "auto", // Only show scrollbars when needed
-                        boxSizing: "border-box", // Include padding in width calculations
-                        maxWidth: "100%", // Prevent content from exceeding viewport
+                        overflow: "auto",
+                        boxSizing: "border-box",
+                        maxWidth: "100%",
                     }}
                 >
                     <HeroSection isDarkMode={isDarkMode} />
