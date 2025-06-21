@@ -1,19 +1,11 @@
 import { useState, useEffect } from "react";
-import {
-    Layout,
-    Button,
-    Modal,
-    Form,
-    Input,
-    InputNumber,
-    Card,
-    Row,
-    Col,
-    message,
-} from "antd";
+import { Layout, Button, Form, Row } from "antd";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import HeaderComponent from "../../components/Navbar/HomeNavbar";
+import FlatCard from "../../components/Listing/FlatCard.jsx";
+import ListingFormModal from "../../components/Listing/ListingFormModal.jsx";
+import LogoutModal from "../../components/Listing/LogoutModal.jsx";
 
 const { Content } = Layout;
 
@@ -29,8 +21,12 @@ const modalVariants = {
 };
 
 const cardVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } },
+    hidden: { opacity: 0, x: -100 },
+    visible: (i) => ({
+        opacity: 1,
+        x: 0,
+        transition: { duration: 0.8, delay: i * 0.2 },
+    }),
 };
 
 // Mock data for listed flats with images
@@ -43,6 +39,8 @@ const mockFlats = [
         location: "New York, NY",
         imageUrl:
             "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        tags: ["1 Bedroom", "1 Bathroom", "Kitchen"],
+        amenities: ["Wi-Fi", "Air Conditioning", "Gym"],
     },
     {
         id: 2,
@@ -52,6 +50,8 @@ const mockFlats = [
         location: "San Francisco, CA",
         imageUrl:
             "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        tags: ["2 Bedrooms", "1 Bathroom", "Balcony"],
+        amenities: ["Wi-Fi", "Air Conditioning", "Parking"],
     },
     {
         id: 3,
@@ -61,6 +61,8 @@ const mockFlats = [
         location: "Miami, FL",
         imageUrl:
             "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/b49bf469697403.5b8a353d1b1ad.jpg",
+        tags: ["3 Bedrooms", "2 Bathrooms", "Swimming Pool"],
+        amenities: ["Wi-Fi", "Air Conditioning", "Gym", "Pool"],
     },
 ];
 
@@ -79,45 +81,6 @@ const ListingPage = ({ isDarkMode, setIsDarkMode }) => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
-
-    // Listing modal handlers
-    const showListingModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const handleModalOk = () => {
-        form.validateFields()
-            .then((values) => {
-                // Simulate saving the listing (no backend)
-                console.log("New Listing:", values);
-                message.success("Flat listed successfully!");
-                form.resetFields();
-                setIsModalOpen(false);
-            })
-            .catch((info) => {
-                console.log("Validation Failed:", info);
-            });
-    };
-
-    const handleModalCancel = () => {
-        form.resetFields();
-        setIsModalOpen(false);
-    };
-
-    // Logout modal handlers
-    const showLogoutModal = () => {
-        setIsLogoutModalOpen(true);
-    };
-
-    const handleLogoutOk = () => {
-        setIsLogoutModalOpen(false);
-        message.info("Logged out successfully");
-        navigate("/login");
-    };
-
-    const handleLogoutCancel = () => {
-        setIsLogoutModalOpen(false);
-    };
 
     // Drawer handlers
     const showDrawer = () => {
@@ -139,7 +102,7 @@ const ListingPage = ({ isDarkMode, setIsDarkMode }) => {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
                 isSmallScreen={isSmallScreen}
-                showModal={showLogoutModal}
+                showModal={() => setIsLogoutModalOpen(true)}
                 showDrawer={showDrawer}
                 isDrawerOpen={isDrawerOpen}
                 closeDrawer={closeDrawer}
@@ -169,7 +132,7 @@ const ListingPage = ({ isDarkMode, setIsDarkMode }) => {
                     <Button
                         type="primary"
                         size="large"
-                        onClick={showListingModal}
+                        onClick={() => setIsModalOpen(true)}
                         style={{
                             width: isSmallScreen ? "100%" : "300px",
                             height: "60px",
@@ -200,160 +163,33 @@ const ListingPage = ({ isDarkMode, setIsDarkMode }) => {
                         Flats Listed by Others
                     </h2>
                     <Row gutter={[16, 16]}>
-                        {mockFlats.map((flat) => (
-                            <Col xs={24} sm={12} md={8} key={flat.id}>
-                                <motion.div variants={cardVariants}>
-                                    <Card
-                                        hoverable
-                                        cover={
-                                            <img
-                                                alt={flat.title}
-                                                src={flat.imageUrl}
-                                                style={{
-                                                    height: "200px",
-                                                    objectFit: "cover",
-                                                    borderTopLeftRadius: "8px",
-                                                    borderTopRightRadius: "8px",
-                                                }}
-                                            />
-                                        }
-                                        style={{
-                                            background: isDarkMode
-                                                ? "#2f2f2f"
-                                                : "#fff",
-                                            color: isDarkMode ? "#fff" : "#000",
-                                            borderRadius: "8px",
-                                            overflow: "hidden",
-                                        }}
-                                        title={
-                                            <h3
-                                                className="text-lg sm:text-lg md:text-xl lg:text-2xl font-extralight"
-                                                style={{
-                                                    color: isDarkMode
-                                                        ? "#fff"
-                                                        : "#000",
-                                                    margin: 0,
-                                                    fontFamily:
-                                                        "Nunito Sans, sans-serif",
-                                                }}
-                                            >
-                                                {flat.title}
-                                            </h3>
-                                        }
-                                    >
-                                        <p>{flat.description}</p>
-                                        <p>
-                                            <strong>Price:</strong> $
-                                            {flat.price}/month
-                                        </p>
-                                        <p>
-                                            <strong>Location:</strong>{" "}
-                                            {flat.location}
-                                        </p>
-                                    </Card>
-                                </motion.div>
-                            </Col>
+                        {mockFlats.map((flat, index) => (
+                            <FlatCard
+                                key={flat.id}
+                                isDarkMode={isDarkMode}
+                                flat={flat}
+                                index={index}
+                                cardVariants={cardVariants}
+                            />
                         ))}
                     </Row>
                 </motion.div>
 
-                {/* Modal for Listing a Flat */}
-                <motion.div
-                    variants={modalVariants}
-                    initial="hidden"
-                    animate={isModalOpen ? "visible" : "hidden"}
-                >
-                    <Modal
-                        title="List a New Flat"
-                        open={isModalOpen}
-                        onOk={handleModalOk}
-                        onCancel={handleModalCancel}
-                        okText="Submit"
-                        cancelText="Cancel"
-                        style={{ background: isDarkMode ? "#2f2f2f" : "#fff" }}
-                    >
-                        <Form
-                            form={form}
-                            layout="vertical"
-                            style={{ color: isDarkMode ? "#fff" : "#000" }}
-                        >
-                            <Form.Item
-                                name="title"
-                                label="Title"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: "Please enter the title",
-                                    },
-                                ]}
-                            >
-                                <Input placeholder="e.g., Cozy Studio in Downtown" />
-                            </Form.Item>
-                            <Form.Item
-                                name="description"
-                                label="Description"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: "Please enter a description",
-                                    },
-                                ]}
-                            >
-                                <Input.TextArea
-                                    rows={4}
-                                    placeholder="Describe the flat..."
-                                />
-                            </Form.Item>
-                            <Form.Item
-                                name="price"
-                                label="Price ($/month)"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: "Please enter the price",
-                                    },
-                                ]}
-                            >
-                                <InputNumber
-                                    min={0}
-                                    style={{ width: "100%" }}
-                                    placeholder="e.g., 1200"
-                                />
-                            </Form.Item>
-                            <Form.Item
-                                name="location"
-                                label="Location"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: "Please enter the location",
-                                    },
-                                ]}
-                            >
-                                <Input placeholder="e.g., New York, NY" />
-                            </Form.Item>
-                        </Form>
-                    </Modal>
-                </motion.div>
+                <ListingFormModal
+                    isDarkMode={isDarkMode}
+                    isModalOpen={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
+                    form={form}
+                    modalVariants={modalVariants}
+                />
 
-                {/* Modal for Logout Confirmation */}
-                <motion.div
-                    variants={modalVariants}
-                    initial="hidden"
-                    animate={isLogoutModalOpen ? "visible" : "hidden"}
-                >
-                    <Modal
-                        title="Confirm Logout"
-                        open={isLogoutModalOpen}
-                        onOk={handleLogoutCancel}
-                        onCancel={handleLogoutOk}
-                        okText="Cancel"
-                        cancelText="Logout"
-                        style={{ background: isDarkMode ? "#2f2f2f" : "#fff" }}
-                    >
-                        <p>Are you sure you want to log out?</p>
-                    </Modal>
-                </motion.div>
+                <LogoutModal
+                    isDarkMode={isDarkMode}
+                    isLogoutModalOpen={isLogoutModalOpen}
+                    setIsLogoutModalOpen={setIsLogoutModalOpen}
+                    navigate={navigate}
+                    modalVariants={modalVariants}
+                />
             </Content>
         </Layout>
     );

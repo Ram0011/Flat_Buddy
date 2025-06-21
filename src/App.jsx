@@ -7,6 +7,7 @@ import IntroPage from "./pages/Intro/IntroPage.jsx";
 import ListingPage from "./pages/Listing/ListingPage.jsx";
 import ProfilePage from "./pages/Profile/ProfilePage.jsx";
 import RoommatesPage from "./pages/Roommates/RoommatesPage.jsx";
+import FlatDetailsPage from "./pages/FlatDetails/FlatDetailsPage.jsx";
 
 function App() {
     const { defaultAlgorithm, darkAlgorithm } = theme;
@@ -68,6 +69,15 @@ function App() {
                     path="/roommates"
                     element={
                         <RoommatesPage
+                            isDarkMode={isDarkMode}
+                            setIsDarkMode={setIsDarkMode}
+                        />
+                    }
+                />
+                <Route
+                    path="/flats/:id"
+                    element={
+                        <FlatDetailsPage
                             isDarkMode={isDarkMode}
                             setIsDarkMode={setIsDarkMode}
                         />

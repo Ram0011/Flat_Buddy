@@ -121,7 +121,9 @@ const HeaderComponent = ({
                         style={{
                             height: isSmallScreen ? 32 : 40,
                             paddingRight: "10px",
+                            cursor: "pointer",
                         }}
+                        onClick={() => navigate("/")}
                     />
                     {!isSmallScreen && (
                         <motion.h1
@@ -133,6 +135,7 @@ const HeaderComponent = ({
                                 fontSize: isSmallScreen ? "1.5rem" : "2.3rem",
                                 fontWeight: "bold",
                                 color: "#fff",
+                                cursor: "pointer",
                                 textShadow: isDarkMode
                                     ? "1px 1px 2px rgba(0, 0, 0, 0.5)"
                                     : "none",

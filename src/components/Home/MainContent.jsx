@@ -39,28 +39,44 @@ const staggerContainer = {
 // Sample data for flats
 const flats = [
     {
-        title: "Shivaji Nagar",
+        id: 1,
+        title: "Flat in Shivaji Nagar",
+        location: "Shivaji Nagar",
         price: "₹30000/month",
+        description: "A spacious flat with modern amenities.",
         image: "https://th.bing.com/th/id/R.bf3f2f0ab470b6ae0acd69d3366b8e71?rik=zDfPdp%2fp8597XA&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f10%2fPhotos-Apartment-HD.jpg&ehk=68xff7gTwc8dN2zuON1jZ0soOcByscrd6C9hwSszjyw%3d&risl=&pid=ImgRaw&r=0",
-        features: ["WiFi", "AC", "Furnished"],
+        amenities: ["WiFi", "AC", "Furnished"],
+        tags: ["2 Bedrooms", "1 Bathroom", "Kitchen"],
     },
     {
-        title: "Kothrud",
+        id: 2,
+        title: "Flat in Kothrud",
+        location: "Kothrud",
         price: "₹19000/month",
+        description: "A cozy flat in a prime location with all facilities.",
         image: "https://www.phillyaptrentals.com/wp-content/uploads/2020/12/apartment-building-what-makes-good-apartment-building-scaled.jpg",
-        features: ["WiFi", "Washer", "Pet-friendly"],
+        amenities: ["WiFi", "Washer", "Pet-friendly"],
+        tags: ["1 Bedroom", "1 Bathroom", "Balcony"],
     },
     {
-        title: "Viman Nagar",
+        id: 3,
+        title: "Flat in Viman Nagar",
+        location: "Viman Nagar",
         price: "₹20000/month",
+        description: "A modern flat with a balcony and gym access.",
         image: "https://static.giggster.com/images/location/ca5202c1-854f-4eb2-83c0-635c5f1e01e4/d859ba35-e9fa-474f-8b44-dfe8ae061b22/full_hd_retina.jpeg",
-        features: ["Balcony", "Gym", "Parking"],
+        amenities: ["Balcony", "Gym", "Parking"],
+        tags: ["1 Bedroom", "1 Bathroom", "Kitchen"],
     },
     {
-        title: "Hinjawadi Phase 2",
+        id: 4,
+        title: "Flat in Hinjawadi Phase 2",
+        location: "Hinjawadi Phase 2",
         price: "₹25000/month",
+        description: "A luxurious flat with a pool and garden.",
         image: "https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://www.glenwoodnyc.com/wp-content/uploads/2022/05/2-JSP-LOBBY-01-02-1280.jpg",
-        features: ["WiFi", "Dishwasher", "Central Heating"],
+        amenities: ["WiFi", "Dishwasher", "Central Heating"],
+        tags: ["3 Bedrooms", "2 Bathrooms", "Swimming Pool"],
     },
 ];
 
@@ -380,7 +396,7 @@ const MainContent = ({ isDarkMode }) => {
                                                             : "#6b7280",
                                                     }}
                                                 >
-                                                    {flat.features.join(", ")}
+                                                    {flat.amenities.join(", ")}
                                                 </p>
                                             </div>
                                         }
@@ -394,7 +410,12 @@ const MainContent = ({ isDarkMode }) => {
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.2 }}
                         >
-                            <Button type="default">Show More</Button>
+                            <Button
+                                type="default"
+                                onClick={() => navigate("/listings")}
+                            >
+                                Show More
+                            </Button>
                         </motion.div>
                     </div>
 

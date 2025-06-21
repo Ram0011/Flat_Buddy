@@ -7,6 +7,7 @@ import RoommateFilters from "../../components/Roommates/RoommateFilters.jsx";
 import RoommateCard from "../../components/Roommates/RoommateCard.jsx";
 import RoommateModals from "../../components/Roommates/RoommateModals.jsx";
 import { useNavigate } from "react-router-dom";
+import { image } from "framer-motion/m";
 
 const { defaultAlgorithm, darkAlgorithm } = theme;
 const { Content } = Layout;
@@ -196,7 +197,7 @@ const RoommatesPage = ({ isDarkMode, setIsDarkMode }) => {
                         className="max-w-7xl mx-auto pb-12"
                     >
                         <h1
-                            className={`text-center text-3xl md:text-4xl lg:text-5xl ${
+                            className={`text-center text-3xl md:text-4xl lg:text-5xl  ${
                                 isDarkMode ? "text-white" : "text-gray-900"
                             }`}
                             style={{
