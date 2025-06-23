@@ -54,10 +54,14 @@ const FeatureSection = ({ isDarkMode }) => {
                 <motion.div variants={fadeIn} className="text-center mb-12">
                     <Title
                         level={2}
-                        style={{ fontFamily: "Roboto", fontWeight: "bold" }}
-                        className={`!text-3xl md:!text-4xl lg:!text-5xl font-bold ${
-                            isDarkMode ? "text-white" : "text-gray-950"
-                        }`}
+                        style={{
+                            fontFamily: "Roboto",
+                            fontWeight: "bold",
+                            color: "#030712",
+                        }}
+                        className={
+                            "!text-3xl md:!text-4xl lg:!text-5xl font-bold text-gray-950"
+                        }
                     >
                         Why Choose Smart Rentals?
                     </Title>

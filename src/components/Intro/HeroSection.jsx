@@ -26,7 +26,7 @@ const HeroSection = ({ isDarkMode }) => {
         <motion.section
             className={`${
                 isDarkMode
-                    ? "bg-gradient-to-b from-gray-800 to-gray-600"
+                    ? "bg-gradient-to-b from-gray-950 via-gray-950 to-gray-900"
                     : "#ebf8ff"
             } bg-sky-50 py-56 px-4 `}
             initial="hidden"

@@ -5,6 +5,7 @@ import {
     ApartmentOutlined,
     LogoutOutlined,
     MenuOutlined,
+    MenuUnfoldOutlined,
 } from "@ant-design/icons";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -53,6 +54,14 @@ const HeaderComponent = ({
         },
         {
             key: "2",
+            icon: <MenuUnfoldOutlined />,
+            label: "Explore",
+            onClick: () => {
+                navigate("/home");
+            },
+        },
+        {
+            key: "3",
             icon: <UserOutlined />,
             label: "My Profile",
             onClick: () => {
@@ -60,7 +69,7 @@ const HeaderComponent = ({
             },
         },
         {
-            key: "3",
+            key: "4",
             icon: <ApartmentOutlined />,
             label: "Listings",
             onClick: () => {
@@ -68,25 +77,24 @@ const HeaderComponent = ({
             },
         },
         {
-            key: "4",
+            key: "5",
             icon: <LogoutOutlined />,
             label: "Logout",
             onClick: showModal,
         },
     ];
 
-    // Map current route to menu key
     const getSelectedKey = () => {
         const path = location.pathname;
         switch (path) {
             case "/":
-                return "1"; // Home
+                return "1";
+            case "/home":
+                return "2";
             case "/profile":
-                return "2"; // My Profile
-            case "/listings":
-                return "3"; // Listings
+                return "3";
             default:
-                return "1"; // Default to Home for unmatched routes
+                return "1";
         }
     };
 
@@ -102,12 +110,13 @@ const HeaderComponent = ({
         >
             <Header
                 style={{
-                    background: isDarkMode ? "#141414" : "#131D4F",
+                    background: isDarkMode ? "#030712" : "#131D4F",
                     padding: "0 16px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
                     width: "100%",
+                    overflowX: "hidden", // prevents header overflow
                 }}
             >
                 <motion.div
@@ -201,7 +210,13 @@ const HeaderComponent = ({
                             </Drawer>
                         </>
                     ) : (
-                        <motion.div variants={staggerContainer}>
+                        <motion.div
+                            variants={staggerContainer}
+                            style={{
+                                overflowX: "auto",
+                                maxWidth: "100vw",
+                            }}
+                        >
                             <Menu
                                 theme="dark"
                                 mode="horizontal"
@@ -214,8 +229,9 @@ const HeaderComponent = ({
                                     fontWeight: 400,
                                     fontSize: "15px",
                                     lineHeight: "64px",
-                                    flex: "0 1 auto",
-                                    minWidth: 0,
+                                    display: "flex",
+                                    flexWrap: "wrap",
+                                    minWidth: "600px",
                                 }}
                             />
                         </motion.div>
