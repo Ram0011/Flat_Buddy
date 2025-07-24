@@ -31,7 +31,7 @@ const ContentComponent = ({ isDarkMode, navigate, setLoading, loading }) => {
         },
         {
             key: "signup",
-            label: "Sign Up",
+            label: "Register",
             children: (
                 <SignupForm
                     isDarkMode={isDarkMode}

@@ -21,14 +21,21 @@ const SignupForm = ({ isDarkMode, setLoading, loading }) => {
     const onFinish = async (values) => {
         setLoading(true);
         try {
-            const response = await axios.post("http://localhost:3000/signup", {
-                userId: values.userId,
-                password: values.password,
-                userName: values.userName,
-            });
+            const response = await axios.post(
+                "http://localhost:4000/api/auth/register",
+                {
+                    uname: values.username,
+                    emailid: values.emailid,
+                    pwd: values.password,
+                    gender: values.gender,
+                    contactno: values.contactno,
+                    profession: values.profession,
+                }
+            );
+
             if (response.data.success) {
                 message.success("Sign up successful! Please log in.");
-                document.getElementById("signup-form").reset();
+                document.getElementById("register-form").reset();
             } else {
                 message.error(response.data.message || "Sign up failed.");
             }
@@ -46,8 +53,8 @@ const SignupForm = ({ isDarkMode, setLoading, loading }) => {
             variants={staggerContainer}
         >
             <Form
-                id="signup-form"
-                name="signup"
+                id="register-form"
+                name="Register"
                 onFinish={onFinish}
                 style={{
                     width: "100%",
@@ -56,16 +63,35 @@ const SignupForm = ({ isDarkMode, setLoading, loading }) => {
             >
                 <motion.div variants={fadeIn}>
                     <Form.Item
-                        name="userId"
+                        name="username"
                         rules={[
                             {
                                 required: true,
-                                message: "Please input your User ID!",
+                                message: "Please input your Username!",
                             },
                         ]}
                     >
                         <Input
-                            placeholder="User ID"
+                            placeholder="Username"
+                            className="text-base md:text-lg"
+                            style={{
+                                fontFamily: "Indie Flower, cursive",
+                            }}
+                        />
+                    </Form.Item>
+                </motion.div>
+                <motion.div variants={fadeIn}>
+                    <Form.Item
+                        name="emailid"
+                        rules={[
+                            {
+                                required: true,
+                                message: "Please enter email id",
+                            },
+                        ]}
+                    >
+                        <Input
+                            placeholder="Email Id"
                             className="text-base md:text-lg"
                             style={{
                                 fontFamily: "Indie Flower, cursive",
@@ -94,16 +120,54 @@ const SignupForm = ({ isDarkMode, setLoading, loading }) => {
                 </motion.div>
                 <motion.div variants={fadeIn}>
                     <Form.Item
-                        name="userName"
+                        name="gender"
                         rules={[
                             {
                                 required: true,
-                                message: "Please input your Name!",
+                                message: "Please input your gender",
                             },
                         ]}
                     >
                         <Input
-                            placeholder="Full Name"
+                            placeholder="Gender"
+                            className="text-base md:text-lg"
+                            style={{
+                                fontFamily: "Indie Flower, cursive",
+                            }}
+                        />
+                    </Form.Item>
+                </motion.div>
+                <motion.div variants={fadeIn}>
+                    <Form.Item
+                        name="contactno"
+                        rules={[
+                            {
+                                required: true,
+                                message: "Please input your Contact no",
+                            },
+                        ]}
+                    >
+                        <Input
+                            placeholder="Contact No"
+                            className="text-base md:text-lg"
+                            style={{
+                                fontFamily: "Indie Flower, cursive",
+                            }}
+                        />
+                    </Form.Item>
+                </motion.div>
+                <motion.div variants={fadeIn}>
+                    <Form.Item
+                        name="profession"
+                        rules={[
+                            {
+                                required: true,
+                                message: "Please input your profession",
+                            },
+                        ]}
+                    >
+                        <Input
+                            placeholder="Profession"
                             className="text-base md:text-lg"
                             style={{
                                 fontFamily: "Indie Flower, cursive",
@@ -120,7 +184,7 @@ const SignupForm = ({ isDarkMode, setLoading, loading }) => {
                             className="text-base md:text-lg"
                             style={{ width: "100%" }}
                         >
-                            Sign Up
+                            Register
                         </Button>
                     </Form.Item>
                 </motion.div>

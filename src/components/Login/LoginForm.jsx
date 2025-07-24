@@ -21,11 +21,15 @@ const LoginForm = ({ isDarkMode, navigate, setLoading, loading }) => {
     const onFinish = async (values) => {
         setLoading(true);
         try {
-            const response = await axios.post("http://localhost:3000/login", {
-                userId: values.userId,
-                password: values.password,
-            });
+            const response = await axios.post(
+                "http://localhost:4000/api/auth/login",
+                {
+                    emailid: values.emailid,
+                    pwd: values.password,
+                }
+            );
             if (response.data.success) {
+                localStorage.setItem("token", response.data.token);
                 message.success(`Welcome, ${response.data.userName}!`);
                 navigate("/");
             } else {
@@ -34,7 +38,10 @@ const LoginForm = ({ isDarkMode, navigate, setLoading, loading }) => {
                 );
             }
         } catch (error) {
-            message.error("Login failed. Please try again.");
+            const msg =
+                error.response?.data?.error ||
+                "Login failed. Please try again.";
+            message.error(msg);
         } finally {
             setLoading(false);
         }
@@ -57,7 +64,7 @@ const LoginForm = ({ isDarkMode, navigate, setLoading, loading }) => {
             >
                 <motion.div variants={fadeIn}>
                     <Form.Item
-                        name="userId"
+                        name="emailid"
                         rules={[
                             {
                                 required: true,
@@ -66,7 +73,7 @@ const LoginForm = ({ isDarkMode, navigate, setLoading, loading }) => {
                         ]}
                     >
                         <Input
-                            placeholder="User ID"
+                            placeholder="Email"
                             className="text-base md:text-lg"
                             style={{
                                 fontFamily: "Indie Flower, cursive",
