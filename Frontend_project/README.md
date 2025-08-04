@@ -15,22 +15,6 @@ This is the frontend application for **Flat_Buddy**, a web-based platform for fl
 
 ---
 
-## 📁 Folder Structure
-
-Frontend_project/
-├── public/
-├── src/
-│ ├── assets/
-│ ├── components/
-│ ├── pages/
-│ ├── App.jsx
-│ └── main.jsx
-├── .gitignore
-├── package.json
-├── tailwind.config.js
-├── vite.config.js
-└── README.md
-
 ## 🔧 Tech Stack
 
 -   [React](https://react.dev/)
