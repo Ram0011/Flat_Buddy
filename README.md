@@ -1,51 +1,82 @@
-Flat Buddy
-Overview
-Flat Buddy is a modern web platform designed to help users list and find rental flats as well as discover compatible roommates based on lifestyle and preference filters. The system utilizes a scalable microservice architecture with a powerful and responsive frontend.
-Features
+🏠 Flat Buddy
+Flat Buddy is a modern web platform designed to help users list and find rental flats as well as discover compatible roommates based on lifestyle and preference filters.
+It uses a scalable microservice architecture with separate backends for authentication and property management, and a powerful React frontend.
 
-Browse Flats - Explore available rental listings with full details.
-List Your Property - Landlords or users can list their own flats for rent.
+✨ Features
+🔍 Browse Flats – Explore available rental listings with full details.
+🏡 List Your Property – Landlords or users can list their flats for rent.
+👥 Roommate Matching – Match with compatible roommates based on lifestyle preferences.
+🔐 Authentication & Roles – Node.js backend handles JWT-based authentication and role-based access control.
+⚡ Scalable Microservices – Clean separation between authentication and property services.
+🛠 Tech Stack
+Frontend
 
-Project Structure
+⚛️ React (JavaScript)
+🎨 Tailwind CSS + Ant Design
+🎬 Framer Motion (animations)
+Backend
 
-Frontend_project: Contains the client-side application built with JavaScript/React.
-BACKEND: Contains the server-side application, likely built with Maven/Java (based on the pom.xml file observed).
-
-Getting Started
-Prerequisites
+🌱 Spring Boot (Java, Maven) → Flats, properties, tenants
+🟩 Node.js + Express → Authentication, JWT, Role management
+🗄 MySQL → Database
+📂 Project Structure
+Flat-Buddy/
+│
+├── Frontend_project/ # React-based frontend
+│ └── package.json
+│
+├── BACKEND/ # Spring Boot backend (properties, flats, tenants)
+│ └── pom.xml
+│
+├── auth-backend/ # Node.js backend (JWT authentication, roles)
+│ └── package.json
+│
+└── README.md
+🚀 Getting Started
+✅ Prerequisites
+Install the following:
 
 Git
-Node.js and npm (for Frontend)
-Java Development Kit (JDK) and Maven (for Backend)
-Text editor or IDE (e.g., VS Code)
+Node.js & npm
+Java JDK & Maven
+A text editor or IDE (VS Code, IntelliJ, or Eclipse)
+📥 Installation
+Clone the repository:
 
-Installation
-
-Clone the Repository
 git clone https://github.com/Ram0011/Flat-Buddy.git
 cd Flat-Buddy
+🎨 Setup Frontend
 
-Setup Frontend
+cd Frontend_project
+npm install
+npm start
+👉 Runs at http://localhost:3000
 
-Navigate to the Frontend_project directory:cd Frontend_project
+⚙️ Setup Authentication Backend (Node.js)
 
-Install dependencies:npm install
+cd auth-backend
+npm install
+npm start
+👉 Runs at http://localhost:4000
 
-Start the development server:npm start
+🏡 Setup Property Backend (Spring Boot)
 
-Setup Backend
+cd BACKEND
+mvn clean install
+mvn spring-boot:run
+👉 Runs at http://localhost:8080
 
-Navigate to the BACKEND directory:cd ../BACKEND
+🔎 Verify Setup
+Frontend: http://localhost:3000
+Auth Backend: http://localhost:4000
+Spring Boot Backend: http://localhost:8080
+🤝 Contributing
+Contributions are welcome! 🎉
 
-Build the project:mvn clean install
-
-Run the application (adjust based on your setup, e.g., using a specific command or IDE):mvn spring-boot:run
-
-(Assuming a Spring Boot application; modify if using a different framework.)
-
-Verify
-
-Open your browser and go to http://localhost:3000 (Frontend) and the backend endpoint (e.g., http://localhost:8080, adjust port as needed).
-
-Contributing
-Feel free to fork this repository and submit pull requests. Please ensure your code follows the project’s coding standards.
+Fork the repository
+Create a branch (git checkout -b feature/your-feature)
+Commit (git commit -m 'Add feature')
+Push (git push origin feature/your-feature)
+Create a Pull Request
+🌟 Show Your Support
+If you like this project, give it a ⭐ on GitHub !
