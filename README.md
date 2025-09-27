@@ -58,7 +58,7 @@ Make sure you have the following installed:
 
 ---
 
-### 📥 Installation
+# 📥 Installation
 
 Clone the repository:
 
@@ -67,7 +67,7 @@ git clone https://github.com/Ram0011/Flat-Buddy.git
 cd Flat-Buddy
 ```
 
-# 🎨 Setup Frontend
+## 🎨 Setup Frontend
 ```
 cd Frontend_project
 npm install
@@ -77,7 +77,7 @@ npm start
 
 ---
 
-# ⚙️ Setup Authentication Backend (Node.js)
+## ⚙️ Setup Authentication Backend (Node.js)
 ```
 cd auth-backend
 npm install
@@ -87,7 +87,7 @@ npm start
 
 ---
 
-# 🏡 Setup Property Backend (Spring Boot)
+## 🏡 Setup Property Backend (Spring Boot)
 ```
 cd BACKEND
 mvn clean install
@@ -97,7 +97,7 @@ mvn spring-boot:run
 
 ---
 
-# 🔎 Verify Setup
+## 🔎 Verify Setup
 - Frontend → http://localhost:3000
 - Auth Backend → http://localhost:4000
 - Spring Boot Backend → http://localhost:8080
