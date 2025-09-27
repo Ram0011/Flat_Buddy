@@ -36,7 +36,7 @@ It uses a **scalable microservice architecture** with separate backends for auth
 - ├── Frontend_project/ # React-based frontend
 - │ └── package.json
 - │
-- ├── BACKEND/ # Spring Boot backend (properties, flats, tenants)
+- ├── spring_backend/ # Spring Boot backend (properties, flats, tenants)
 - │ └── pom.xml
 - │
 - ├── auth-backend/ # Node.js backend (JWT authentication, roles)
